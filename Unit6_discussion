@@ -1,0 +1,120 @@
+====================================================
+UNIT 6 DISCUSSION: Python Dictionaries as Hash Tables
+====================================================
+
+INSTRUCTIONS:
+In this activity, you will work with Python dictionaries
+to simulate the behavior of a hash table.
+
+You will modify the provided starter code to demonstrate
+common operations and explain key concepts.
+
+Follow all TODO prompts in the code and ensure your output
+clearly communicates what your program is doing at each step.
+
+----------------------------------------------------
+"""
+
+
+def main():
+    print("=== UNIT 6: DICTIONARIES AS HASH TABLES ===")
+
+    # ===============================
+    # TODO (Student): CREATE A HASH TABLE
+    # ===============================
+    #
+    # Requirements:
+    # 1. Create an empty dictionary.
+    # 2. Add at least 5 key-value pairs.
+    # 3. Add comments explaining how a dictionary
+    #    behaves like a hash table.
+    # 4. Display the contents of the dictionary.
+
+
+    print("\n=== INSERT OPERATIONS ===")
+    # A dictionary uses hashing to associate each unique SKU with its quantity.
+    # Python manages hash collisions internally; keys remain distinct.
+    inventory = {}
+    inventory["SKU100"] = 12
+    inventory["SKU101"] = 8
+    inventory["SKU102"] = 20
+    inventory["SKU103"] = 5
+    inventory["SKU104"] = 14
+    print("Inventory after inserting five items:", inventory)
+
+    # ===============================
+    # TODO (Student): LOOKUP OPERATIONS
+    # ===============================
+    #
+    # Requirements:
+    # 1. Retrieve at least two existing keys.
+    # 2. Clearly display the lookup results.
+    # 3. Add meaningful comments to explain how the lookup works.
+
+    print("\n=== LOOKUP OPERATIONS ===")
+    # Dictionary indexing retrieves a quantity by its SKU without scanning all items.
+    for sku in ("SKU100", "SKU103"):
+        print(f"{sku}: {inventory[sku]} units")
+
+    # ===============================
+    # TODO (Student): UPDATE OPERATIONS
+    # ===============================
+    #
+    # Requirements:
+    # 1. Update the value associated with an existing key.
+    # 2. Display the dictionary before and after the update.
+    # 3. Use comments to explain what happens when an existing key is assigned
+    #    a new value.
+
+    print("\n=== UPDATE OPERATIONS ===")
+    print("Before update:", inventory)
+    # Assigning an existing key replaces its value without adding another entry.
+    inventory["SKU101"] = 11
+    print("After updating SKU101:", inventory)
+
+    # ===============================
+    # TODO (Student): DELETE OPERATIONS
+    # ===============================
+    #
+    # Requirements:
+    # 1. Delete at least one key-value pair.
+    # 2. Display the dictionary before and after deletion.
+    # 3. Use comments to explain what happens when a key is removed.
+
+    print("\n=== DELETE OPERATIONS ===")
+    print("Before deletion:", inventory)
+    # pop removes the key-value pair, making its SKU unavailable for lookup.
+    removed = inventory.pop("SKU104")
+    print(f"Removed SKU104 ({removed} units)")
+    print("After deletion:", inventory)
+
+    # ===============================
+    # TODO (Student): EDGE CASES
+    # ===============================
+    #
+    # Demonstrate at least two edge cases.
+    #
+    # Example ideas:
+    # - Lookup a missing key
+    # - Delete a missing key safely
+    # - Update a missing key
+    # - Use an empty dictionary
+    #
+    # Explain what happens in each case.
+
+    print("\n=== EDGE CASES ===")
+    # get returns a default instead of raising KeyError for an unknown SKU.
+    print("Missing SKU999 lookup:", inventory.get("SKU999", "Not found"))
+    # pop with a default safely handles a deletion request for a missing SKU.
+    print("Remove missing SKU999:", inventory.pop("SKU999", "Not found"))
+    # A missing key assigned a quantity is inserted as a new inventory record.
+    inventory["SKU105"] = 7
+    print("After adding new SKU105:", inventory)
+    # An empty dictionary is valid and supports safe lookups.
+    empty_inventory = {}
+    print("Empty inventory lookup:", empty_inventory.get("SKU100", "Not found"))
+
+
+
+if __name__ == "__main__":
+    main()
